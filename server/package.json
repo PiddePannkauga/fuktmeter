@@ -1,0 +1,20 @@
+{
+  "name": "fuktmeter",
+  "version": "1.0.0",
+  "description": "fukt avläsare från arduino",
+  "main": "fuktserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fukt"
+  ],
+  "author": "Pidde \"fuktschwamp\" Mansson",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "loadash": "^1.0.0",
+    "serialport": "^7.0.2",
+    "socket.io": "^2.1.1"
+  }
+}
