@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Axios from '../node_modules/axios';
 
@@ -11,7 +10,7 @@ class App extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {helloworld: "Test"};
+    this.state = {helloworld: "No fukt"};
   }
   
 
@@ -21,22 +20,16 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+
         </header>
         <label>{this.state.helloworld}</label>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-         
-          
-        </p>
       </div>
     );
   
   
   }
   serverData = ()=>{
-     return Axios.get("http://localhost:3000/").then(resp=>{
+     return Axios.get("http://192.168.0.76:3000/").then(resp=>{
       
       return resp.data;
     }
