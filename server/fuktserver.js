@@ -8,7 +8,7 @@ let runPy = new Promise((resolve, reject) => {
   const pyprog = spawn('python', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
   pyprog.stdout.on('data', function(data) {
-
+      console.log("Inside Resolve")
       resolve(data);
   });
 
