@@ -14,7 +14,7 @@ let runPy = new Promise((resolve, reject) => {
 
   pyprog.stderr.on('data', (data) => {
 
-      reject(data);
+      reject(data,'NoWork');
   });
 });
 
@@ -27,7 +27,7 @@ app.get('/', (req, res) =>{
   res.write('welcome\n');
 
     runPy.then(function(fromRunpy) {
-        console.log(fromRunpy.toString());
+        console.log(fromRunpy.toString(), '    hej');
         res.end(fromRunpy);
     });
   })
