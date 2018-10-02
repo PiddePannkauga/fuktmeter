@@ -16,7 +16,9 @@ class App extends Component {
 
   render() {
     let fetchedServerData=this.serverData()
+    setInterval(()=>{
     fetchedServerData.then(resp=>{this.setState({helloworld:resp})})
+    }, 2000)
     return (
       <div className="App">
         <header className="App-header">
