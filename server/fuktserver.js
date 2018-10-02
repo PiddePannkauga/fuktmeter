@@ -14,11 +14,10 @@ app.use(function(req, res,next) {
 
 
 app.get('/', (req, res) =>{
+  const { spawn } = require('child_process');
+  const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
   let runPy = new Promise((resolve, reject) => {
 
-    const { spawn } = require('child_process');
-    const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
-  
     pyprog.stdout.on('data', function(data) {
         console.log("Inside Resolve")
         resolve(data);
