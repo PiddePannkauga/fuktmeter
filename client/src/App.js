@@ -29,7 +29,7 @@ class App extends Component {
   
   }
   serverData = ()=>{
-     return Axios.get("http://192.168.0.76:3000/").then(resp=>{
+     return Axios.get("http://localhost:3200/").then(resp=>{
       
       return resp.data;
     }

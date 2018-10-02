@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3200
 
 let runPy = new Promise((resolve, reject) => {
 
@@ -27,8 +27,10 @@ app.get('/', (req, res) =>{
   res.write('welcome\n');
 
     runPy.then(function(fromRunpy) {
-        console.log(fromRunpy.toString(), '    hej');
-        res.end(fromRunpy);
+        console.log(fromRunpy.toString());
+        res.send(fromRunpy);
+    }).catch((err) => {
+      console.log(err.toString())
     });
   })
     
