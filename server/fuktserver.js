@@ -22,17 +22,20 @@ app.get('/', (req, res) =>{
     pyprog.stdout.on('data', function(data) {
         console.log("Inside Resolve")
         resolve(data);
+        
     });
   
     pyprog.stderr.on('data', (data) => {
   
         reject(data,'NoWork');
     });
-  });
+
+  })
+
     runPy.then(function(fromRunpy) {
         console.log(fromRunpy.toString());
         res.send(fromRunpy);
-        runPy.kill('SIGINT')
+        pyprog.kill('SIGINT')
     }).catch((err) => {
       console.log(err.toString())
     });
