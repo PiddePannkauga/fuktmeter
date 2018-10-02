@@ -10,28 +10,29 @@ app.use(function(req, res,next) {
 
 
 
-let runPy = new Promise((resolve, reject) => {
 
-  const { spawn } = require('child_process');
-  const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
-
-  pyprog.stdout.on('data', function(data) {
-      console.log("Inside Resolve")
-      resolve(data);
-  });
-
-  pyprog.stderr.on('data', (data) => {
-
-      reject(data,'NoWork');
-  });
-});
 
 
 app.get('/', (req, res) =>{
+  let runPy = new Promise((resolve, reject) => {
+
+    const { spawn } = require('child_process');
+    const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
   
+    pyprog.stdout.on('data', function(data) {
+        console.log("Inside Resolve")
+        resolve(data);
+    });
+  
+    pyprog.stderr.on('data', (data) => {
+  
+        reject(data,'NoWork');
+    });
+  });
     runPy.then(function(fromRunpy) {
         console.log(fromRunpy.toString());
         res.send(fromRunpy);
+        runPy.kill('SIGINT')
     }).catch((err) => {
       console.log(err.toString())
     });

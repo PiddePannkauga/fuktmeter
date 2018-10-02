@@ -18,7 +18,7 @@ class App extends Component {
     let fetchedServerData=this.serverData()
     setInterval(()=>{
     fetchedServerData.then(resp=>{this.setState({helloworld:resp})})
-    }, 2000)
+    }, 5000)
     return (
       <div className="App">
         <header className="App-header">
@@ -32,7 +32,7 @@ class App extends Component {
   }
   serverData = ()=>{
      return Axios.get("http://192.168.0.76:3200/").then(resp=>{
-      
+      console.log(resp.data)
       return resp.data;
     }
       
