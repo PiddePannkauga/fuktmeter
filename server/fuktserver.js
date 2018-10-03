@@ -25,7 +25,7 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
-  pyprog.unref();
+  pyprog.kill('SIGTERM')
 
 })
 
@@ -44,18 +44,3 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-// const SerialPort = require('serialport')
-// const arduinoPort = new SerialPort('/dev/ttyACM0', function (err) {
-//   if (err) {
-//     return console.log('Error: ', err.message)
-//   }
-// })
-// const Readline = require('@serialport/parser-readline')
-// const parser = arduinoPort.pipe(new Readline({ delimiter: '\r\n' }))
-// parser.on('data', test)
-
-// function test(data){
-//   var humidity = data;
-//   return humidity;
-// }
