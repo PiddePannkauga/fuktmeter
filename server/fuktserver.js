@@ -26,11 +26,10 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
-  pyprog.on('close', (code)=>{
-      if(code!==0){
-      console.log('script ended with code ${code}')
-      }
-      pyprog.kill('SIGINT')
+  pyprog.stdin.pause(()=>{
+    console.log('pause')
+    pyprog.kill('SIGINT')
+    
   })
 
 })
