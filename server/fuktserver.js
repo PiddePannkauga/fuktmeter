@@ -26,17 +26,22 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
+  pyprog.on('close', (code)=>{
+      if(code!==0){
+      console.log('script ended with code ${code}')
+      }
+      pyprog.kill('SIGINT')
+  })
+
 })
 
 
 
 app.get('/', (req, res) => {
 
-
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
     res.send(fromRunpy);
-    pyprog.kill('SIGINT')
   }).catch((err) => {
     console.log(err.toString())
   });
