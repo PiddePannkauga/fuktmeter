@@ -25,7 +25,7 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
-  pyprog.kill('SIGTERM')
+ 
 
 })
 
@@ -36,6 +36,7 @@ app.get('/', (req, res) => {
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
     res.send(fromRunpy);
+    pyprog.kill('SIGTERM')
     
   }).catch((err) => {
     console.log(err.toString())
