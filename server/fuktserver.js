@@ -18,6 +18,7 @@ let runPy = new Promise((resolve, reject) => {
   pyprog.stdout.on('data', function (data) {
     console.log("Inside Resolve")
     resolve(data);
+    pyprog.kill('SIGINT')
 
   });
 
@@ -25,12 +26,6 @@ let runPy = new Promise((resolve, reject) => {
 
     reject(data, 'NoWork');
   });
-
-  pyprog.stdin.pause(()=>{
-    console.log('pause')
-    pyprog.kill('SIGINT')
-    
-  })
 
 })
 
