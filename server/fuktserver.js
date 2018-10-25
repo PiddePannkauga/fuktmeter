@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString())
+    console.log(pyprog.pid)
     res.end(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
