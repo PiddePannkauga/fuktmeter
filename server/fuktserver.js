@@ -19,6 +19,7 @@ let runPy = new Promise((resolve, reject) => {
   pyprog.stdout.on('data', function (data) {
     console.log(data.toString(), pyprog.pid)
     resolve(data);
+    pyprog.exit();
   });
 
   pyprog.stderr.on('data', (data) => {
