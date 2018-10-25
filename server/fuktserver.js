@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
   let runPy = new Promise((resolve, reject) => {
 
     pyprog.stdout.on('data', function (data) {
+      console.log(data.toString())
      resolve(data);
     });
   
