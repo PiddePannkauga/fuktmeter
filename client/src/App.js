@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './App.css';
 import Axios from '../node_modules/axios';
 
@@ -6,32 +6,43 @@ import Axios from '../node_modules/axios';
 
 
 
-class App extends Component {
+class App extends PureComponent {
   
   constructor(props) {
     super(props);
-    this.state = {helloworld: "No fukt"};
+    this.state = {tempHum: "No fukt"};
   }
-  
+
+  componentDidMount(){
+    // this.serverData().then(resp=>{this.setState({tempHum:resp})})
+    this.serverDataLoop();
+  }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return nextProps.tempHum !== this.props.tempHum;
+
+  // }
 
   render() {
-    let fetchedServerData=this.serverData()
-    setInterval(()=>{
-    fetchedServerData.then(resp=>{this.setState({helloworld:resp})})
-    }, 5000)
+
     return (
       <div className="App">
         <header className="App-header">
 
         </header>
-        <label>{this.state.helloworld}</label>
+        <label>{this.state.tempHum}</label>
       </div>
     );
   
-  
   }
-  serverData = ()=>{
-     return Axios.get("http://192.168.0.76:3200/").then(resp=>{
+
+  serverDataLoop(){
+    setInterval(()=>{
+    this.serverData().then(resp=>{this.setState({tempHum:resp})})},5000)
+  }
+
+  serverData = () =>{
+      return Axios.get("http://192.168.0.76:3200/").then(resp=>{
       console.log(resp.data)
       return resp.data;
     }

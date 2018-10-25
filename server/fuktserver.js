@@ -13,13 +13,12 @@ app.use(function (req, res, next) {
 
 let runPy = new Promise((resolve, reject) => {
 
-  const {spawn} = require('child_process');
-  const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
+  const {exec} = require('child_process');
+  const pyprog = exec('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
   pyprog.stdout.on('data', function (data) {
     console.log(data.toString(), pyprog.pid)
     resolve(data);
-    pyprog.kill('SIGTERM')
   });
 
   pyprog.stderr.on('data', (data) => {
