@@ -24,6 +24,10 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
+  pyprog.on('close', (code) =>{
+    console.log(code)
+  })
+
 })
 
 
@@ -31,7 +35,7 @@ app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString())
-    console.log(pyprog.pid, pyprog.stdout.data.toString())
+    console.log(pyprog.pid)
     res.end(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
