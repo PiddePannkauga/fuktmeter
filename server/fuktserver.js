@@ -12,16 +12,14 @@ app.use(function (req, res, next) {
 const {
   spawn
 } = require('child_process');
-const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py'],{detached:true});
+const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
 let runPy = new Promise((resolve, reject) => {
 
   pyprog.stdout.on('data', function (data) {
-    console.log("Inside Resolve")
     resolve(data);
   });
 
   pyprog.stderr.on('data', (data) => {
-
     reject(data, 'NoWork');
   });
 
@@ -36,7 +34,7 @@ app.get('/', (req, res) => {
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
     res.send(fromRunpy);
-    pyprog.kill('SIGTERM')
+    fromRunpy.kill('SIGTERM')
     
   }).catch((err) => {
     console.log(err.toString())
