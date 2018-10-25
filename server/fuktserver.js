@@ -40,7 +40,6 @@ function run() {
 app.get('/', (req, res) => {
 
   run().then(function (fromRunpy) {
-    console.log(fromRunpy.toString())
     res.end(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
