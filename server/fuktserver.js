@@ -20,6 +20,10 @@ let runPy = new Promise((resolve, reject) => {
     pyprog.kill('SIGTERM')
   });
 
+  pyprog.stdio.on('data', function(data){
+    console.log(data, data.toString())
+  });
+
   pyprog.stderr.on('data', (data) => {
     reject(data, 'NoWork');
   });
