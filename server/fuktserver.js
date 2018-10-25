@@ -17,11 +17,6 @@ let runPy = new Promise((resolve, reject) => {
   pyprog.stdout.on('data', function (data) {
     console.log(data)
     resolve(data);
-    pyprog.kill('SIGTERM')
-  });
-
-  pyprog.stdio.on('data', function(data){
-    console.log(data, data.toString())
   });
 
   pyprog.stderr.on('data', (data) => {
