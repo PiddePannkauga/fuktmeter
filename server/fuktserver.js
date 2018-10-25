@@ -13,24 +13,26 @@ const {spawn} = require('child_process');
 const pyprog = spawn('python3', ['-u','./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
 
-let runPy = new Promise((resolve, reject) => {
 
-  pyprog.stdout.on('data', function (data) {
-   resolve(data);
-  });
-
-  pyprog.stderr.on('data', (data) => {
-    reject(data, 'NoWork');
-  });
-
-  pyprog.on('close', (code) =>{
-    console.log(code)
-  })
-
-})
 
 
 app.get('/', (req, res) => {
+
+  let runPy = new Promise((resolve, reject) => {
+
+    pyprog.stdout.on('data', function (data) {
+     resolve(data);
+    });
+  
+    pyprog.stderr.on('data', (data) => {
+      reject(data, 'NoWork');
+    });
+  
+    pyprog.on('close', (code) =>{
+      console.log(code)
+    })
+  
+  })
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString())
