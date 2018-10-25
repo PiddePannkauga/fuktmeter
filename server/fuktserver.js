@@ -17,7 +17,7 @@ let runPy = new Promise((resolve, reject) => {
   const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
   pyprog.stdout.on('data', function (data) {
-    console.log(data.toString())
+    console.log(data.toString(), pyprog.pid)
     resolve(data);
     pyprog.kill('SIGTERM')
   });
