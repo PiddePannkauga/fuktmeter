@@ -9,10 +9,12 @@ app.use(function (req, res, next) {
 });
 
 
-const {spawn} = require('child_process');
-const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py'], {detached:true});
+
 
 let runPy = new Promise((resolve, reject) => {
+
+  let {spawn} = require('child_process');
+  let pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py'], {detached:true});
 
   pyprog.stdout.on('data', function (data) {
     console.log(data)
