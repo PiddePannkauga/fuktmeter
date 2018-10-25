@@ -12,12 +12,7 @@ app.use(function (req, res, next) {
 const {spawn} = require('child_process');
 const pyprog = spawn('python3', ['-u','./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
-
-
-
-
-app.get('/', (req, res) => {
-
+function run(){
   let runPy = new Promise((resolve, reject) => {
 
     pyprog.stdout.on('data', function (data) {
@@ -34,8 +29,16 @@ app.get('/', (req, res) => {
     })
   
   })
+  return runPy;
+}
 
-  runPy.then(function (fromRunpy) {
+
+
+app.get('/', (req, res) => {
+
+
+
+  run().then(function (fromRunpy) {
     console.log(fromRunpy.toString())
     res.end(fromRunpy)
   }).catch((err) => {
