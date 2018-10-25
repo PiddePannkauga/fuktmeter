@@ -10,16 +10,14 @@ app.use(function (req, res, next) {
 
 
 const {execFile} = require('child_process');
-  const pyprog = execFile('python3', ['-u','./python/Adafruit_Python_DHT/examples/simpletest.py']);
+const pyprog = execFile('python3', ['-u','./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
 
 let runPy = new Promise((resolve, reject) => {
 
-  
   pyprog.stdout.on('data', function (data) {
     console.log(data.toString(), pyprog.pid)
     resolve(data);
-    pyprog.exit();
   });
 
   pyprog.stderr.on('data', (data) => {
@@ -33,7 +31,7 @@ app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString())
-    console.log(pyprog.pid)
+    console.log(pyprog.pid, pyprog.stdout)
     res.end(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
