@@ -9,9 +9,7 @@ app.use(function (req, res, next) {
 });
 
 
-const {
-  spawn
-} = require('child_process');
+const spawn = require('child_process');
 const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simpletest.py']);
 let runPy = new Promise((resolve, reject) => {
 
@@ -23,7 +21,10 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
- 
+  pyprog.on('close',(code)=>{
+    console.log(code);
+    pyprog.kill('SIGTERM');
+  })
 
 })
 
@@ -34,8 +35,6 @@ app.get('/', (req, res) => {
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
     res.send(fromRunpy);
-    fromRunpy.kill('SIGTERM')
-    
   }).catch((err) => {
     console.log(err.toString())
   });
