@@ -9,8 +9,8 @@ app.use(function (req, res, next) {
 });
 
 
-const {execFile} = require('child_process');
-const pyprog = execFile('python3', ['-u','./python/Adafruit_Python_DHT/examples/simpletest.py']);
+const {spawn} = require('child_process');
+const pyprog = spawn('python3', ['-u','./python/Adafruit_Python_DHT/examples/simpletest.py']);
 
 
 let runPy = new Promise((resolve, reject) => {
@@ -34,8 +34,6 @@ app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString())
-    pyprog.stdout.on('data', function (data) {
-      console.log(data.toString())})
     res.end(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
