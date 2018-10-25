@@ -23,18 +23,15 @@ let runPy = new Promise((resolve, reject) => {
 
 })
 
-let temphum = function getTempHum(){
- return runPy.then(function (fromRunpy) {
+
+app.get('/', (req, res) => {
+
+  runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
     return fromRunpy;
   }).catch((err) => {
     console.log(err.toString())
   });
-}
-
-app.get('/', (req, res) => {
-
-  res.send(temphum)
 
 })
 
