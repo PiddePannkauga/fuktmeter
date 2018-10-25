@@ -29,6 +29,7 @@ let runPy = new Promise((resolve, reject) => {
 app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
+    console.log(fromRunpy)
     res.send(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
