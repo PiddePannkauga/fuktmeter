@@ -21,23 +21,20 @@ let runPy = new Promise((resolve, reject) => {
     reject(data, 'NoWork');
   });
 
-  pyprog.on('close',(code)=>{
-    console.log(code);
-    pyprog.kill('SIGTERM');
-  })
-
 })
 
-
-
-app.get('/', (req, res) => {
-
-  runPy.then(function (fromRunpy) {
+let temphum = function getTempHum(){
+ return runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
-    res.send(fromRunpy);
+    return fromRunpy;
   }).catch((err) => {
     console.log(err.toString())
   });
+}
+
+app.get('/', (req, res) => {
+
+  res.send(temphum)
 
 })
 
