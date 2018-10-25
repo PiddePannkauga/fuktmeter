@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString());
-    return fromRunpy;
+    res.send(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
   });
