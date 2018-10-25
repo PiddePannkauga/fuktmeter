@@ -17,6 +17,7 @@ let runPy = new Promise((resolve, reject) => {
   pyprog.stdout.on('data', function (data) {
     console.log(data)
     resolve(data);
+    pyprog.kill('SIGTERM')
   });
 
   pyprog.stderr.on('data', (data) => {
@@ -29,7 +30,6 @@ let runPy = new Promise((resolve, reject) => {
 app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
-
     res.send(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
