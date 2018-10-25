@@ -15,6 +15,7 @@ const pyprog = spawn('python3', ['./python/Adafruit_Python_DHT/examples/simplete
 let runPy = new Promise((resolve, reject) => {
 
   pyprog.stdout.on('data', function (data) {
+    console.log(data)
     resolve(data);
   });
 
@@ -28,7 +29,7 @@ let runPy = new Promise((resolve, reject) => {
 app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
-    console.log(fromRunpy.toString());
+
     res.send(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
