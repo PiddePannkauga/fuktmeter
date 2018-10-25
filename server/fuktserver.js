@@ -16,8 +16,7 @@ const pyprog = execFile('python3', ['-u','./python/Adafruit_Python_DHT/examples/
 let runPy = new Promise((resolve, reject) => {
 
   pyprog.stdout.on('data', function (data) {
-    console.log(data.toString(), pyprog.pid)
-    resolve(data);
+   resolve(data);
   });
 
   pyprog.stderr.on('data', (data) => {
@@ -35,7 +34,8 @@ app.get('/', (req, res) => {
 
   runPy.then(function (fromRunpy) {
     console.log(fromRunpy.toString())
-    console.log(pyprog.pid)
+    console.log( pyprog.stdout.on('data', function (data) {
+      console.log(data.toString())}))
     res.end(fromRunpy)
   }).catch((err) => {
     console.log(err.toString())
